@@ -13,12 +13,14 @@ posts = [
         'content': 'First post content',
         'date_posted': 'May 12, 2022'
     },
+    
     {
         'author': 'Eugene Cruz',
         'title': 'Blog Post 2',
         'content': 'Second post content',
         'date_posted': 'May 13, 2022'
     },
+    
     {
         'author': 'John',
         'title': 'Blog Post 3',
@@ -40,9 +42,9 @@ def about():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
     if current_user.is_authenticated:
         return redirect(url_for('home'))
+    form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password = hashed_password)
